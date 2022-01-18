@@ -12,3 +12,6 @@
 
 ::: sorting
 
+## Module `Test`
+
+::: src.test
