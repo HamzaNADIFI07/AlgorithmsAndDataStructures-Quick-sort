@@ -2,15 +2,15 @@
 
 ## Module `Element`
 
-::: element
+::: src.element
 
 ## Module `Generate`
 
-::: generate
+::: src.generate
 
 ## Module `Sorting`
 
-::: sorting
+::: src.sorting
 
 ## Module `Test`
 
