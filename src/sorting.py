@@ -109,8 +109,21 @@ def quicksort (t, cmp):
 
     Warning: Attention
              **ÉCRIRE LES DOCTESTS**
+    >>> import numpy
+    >>> def cmp (x,y): 
+    ...    if x == y:
+    ...       return 0
+    ...    elif x < y:
+    ...       return -1
+    ...    else:
+    ...       return 1
+    >>> t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
+    >>> quicksort(t, cmp)
+    >>> list(map(int,t))
+    [1, 2, 3, 4, 5, 6, 7, 8, 9]
     """
-    pass
+    s = {'data':t, 'left':0, 'right':len(t)-1}
+    quicksort_slice(s, cmp)
 
 
 def quicksort_slice (s, cmp):
@@ -127,8 +140,25 @@ def quicksort_slice (s, cmp):
 
     Warning: Attention
              **ÉCRIRE LES DOCTESTS**
+    >>> import numpy
+    >>> def cmp (x,y): 
+    ...    if x == y:
+    ...       return 0
+    ...    elif x < y:
+    ...       return -1
+    ...    else:
+    ...       return 1
+    >>> t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
+    >>> s = {'left': 0, 'right': len(t) - 1, 'data': t}
+    >>> quicksort_slice(s, cmp)
+    >>> list(map(int,s['data']))
+    [1, 2, 3, 4, 5, 6, 7, 8, 9]
     """
-    pass
+    
+    if s['left'] < s['right']:
+        (s1, s2) = partition(s, cmp,naive_pivot(s))
+        quicksort_slice(s1, cmp)
+        quicksort_slice(s2, cmp)
 
 def naive_pivot(s):
     '''
@@ -149,7 +179,7 @@ def naive_pivot(s):
       >>> naive_pivot(s)
       3
     '''
-    pass
+    return s['left']
 
 def partition (s, cmp, pivot_pos):
     """
@@ -188,17 +218,42 @@ def partition (s, cmp, pivot_pos):
       >>> p = {'left':0,'right':len(t)-1,'data':t}
       >>> p1,p2 = partition(p,cmp,0)
       >>> list(p1['data'][p1['left']:p1['right']+1])
-      None
+      [2, 1, 3, 4]
       >>> list(p2['data'][p2['left']:p2['right']+1])
-      None
+      [8, 9, 7, 6]
+      >>> t = numpy.array([2, 1])
+      >>> p = {'left': 0, 'right': len(t) - 1, 'data': t}
+      >>> p1, p2 = partition(p, cmp, 0)  # Pivot = 2
+      >>> list(map(int, p1['data'][p1['left']:p1['right'] + 1]))
+      [1]
+      >>> list(p2['data'][p2['left']:p2['right'] + 1])
+      []
 
+  
     Warning: Attention
              **FINIR D'ÉCRIRE LES DOCTESTS**
 
              * Remplacer `None` par la valeur attendue
              * Rajouter des tests
     """
-    return (None,None)
+    i = s['left'] + 1
+    j = s['right']
+    p = s['data'][pivot_pos]
+    place = s['left']
+    while i <= j:
+        comp = cmp(s['data'][i], p)
+        if comp < 0:
+            s['data'][i], s['data'][place] = s['data'][place], s['data'][i]
+            place = i
+            i += 1
+        else:
+            s['data'][i], s['data'][j] = s['data'][j], s['data'][i]
+            j -= 1
+
+    p1 = {"data": s['data'], "left": s['left'], "right": place - 1}
+    p2 = {"data": s['data'], "left": place + 1, "right": s['right']}
+    return (p1, p2)
+
 
 
 if __name__ == "__main__":

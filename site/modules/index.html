@@ -2021,26 +2021,26 @@
 
           <details class="quote">
             <summary>Source code in <code>src/sorting.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">naive_pivot</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">naive_pivot</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Args:</span>
 <span class="sd">      s (dict): A slice of an array, that is a dictionary with 3 fields :</span>
@@ -2059,7 +2059,7 @@
 <span class="sd">      &gt;&gt;&gt; naive_pivot(s)</span>
 <span class="sd">      3</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -2222,9 +2222,16 @@ elements.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">t</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">cmp</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]:</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="go">None</span>
+<span class="go">[2, 1, 3, 4]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]:</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="go">None</span>
+<span class="go">[8, 9, 7, 6]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">t</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Pivot = 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">p1</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]:</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">[1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]:</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[]</span>
 </code></pre></div>
 
 <details class="warning" open>
@@ -2237,37 +2244,7 @@ elements.</p>
 </details>
           <details class="quote">
             <summary>Source code in <code>src/sorting.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">184</span>
 <span class="normal">185</span>
 <span class="normal">186</span>
 <span class="normal">187</span>
@@ -2284,7 +2261,61 @@ elements.</p>
 <span class="normal">198</span>
 <span class="normal">199</span>
 <span class="normal">200</span>
-<span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">partition</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">pivot_pos</span><span class="p">):</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">partition</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">pivot_pos</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates two slices from `s` by selecting in the first slice all</span>
 <span class="sd">    elements that are lower than the pivot and in the second one all the other</span>
@@ -2321,9 +2352,17 @@ elements.</p>
 <span class="sd">      &gt;&gt;&gt; p = {&#39;left&#39;:0,&#39;right&#39;:len(t)-1,&#39;data&#39;:t}</span>
 <span class="sd">      &gt;&gt;&gt; p1,p2 = partition(p,cmp,0)</span>
 <span class="sd">      &gt;&gt;&gt; list(p1[&#39;data&#39;][p1[&#39;left&#39;]:p1[&#39;right&#39;]+1])</span>
-<span class="sd">      None</span>
+<span class="sd">      [2, 1, 3, 4]</span>
 <span class="sd">      &gt;&gt;&gt; list(p2[&#39;data&#39;][p2[&#39;left&#39;]:p2[&#39;right&#39;]+1])</span>
-<span class="sd">      None</span>
+<span class="sd">      [8, 9, 7, 6]</span>
+<span class="sd">      &gt;&gt;&gt; t = numpy.array([2, 1])</span>
+<span class="sd">      &gt;&gt;&gt; p = {&#39;left&#39;: 0, &#39;right&#39;: len(t) - 1, &#39;data&#39;: t}</span>
+<span class="sd">      &gt;&gt;&gt; p1, p2 = partition(p, cmp, 0)  # Pivot = 2</span>
+<span class="sd">      &gt;&gt;&gt; list(map(int, p1[&#39;data&#39;][p1[&#39;left&#39;]:p1[&#39;right&#39;] + 1]))</span>
+<span class="sd">      [1]</span>
+<span class="sd">      &gt;&gt;&gt; list(p2[&#39;data&#39;][p2[&#39;left&#39;]:p2[&#39;right&#39;] + 1])</span>
+<span class="sd">      []</span>
+
 
 <span class="sd">    Warning: Attention</span>
 <span class="sd">             **FINIR D&#39;ÉCRIRE LES DOCTESTS**</span>
@@ -2331,7 +2370,23 @@ elements.</p>
 <span class="sd">             * Remplacer `None` par la valeur attendue</span>
 <span class="sd">             * Rajouter des tests</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">pivot_pos</span><span class="p">]</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">cmp</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">place</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">place</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">place</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">],</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">place</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">place</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -2405,7 +2460,25 @@ elements.</p>
 <details class="warning" open>
   <summary>Attention</summary>
   <p><strong>ÉCRIRE LES DOCTESTS</strong></p>
-</details>
+</details>      <blockquote>
+<blockquote>
+<blockquote>
+<p>import numpy
+def cmp (x,y): 
+...    if x == y:
+...       return 0
+...    elif x &lt; y:
+...       return -1
+...    else:
+...       return 1
+t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
+quicksort(t, cmp)
+list(map(int,t))
+[1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
           <details class="quote">
             <summary>Source code in <code>src/sorting.py</code></summary>
             <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
@@ -2424,7 +2497,20 @@ elements.</p>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">quicksort</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">cmp</span><span class="p">):</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">quicksort</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">cmp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A sorting function implementing the quicksort algorithm on the whole array `t`.</span>
 
@@ -2439,8 +2525,21 @@ elements.</p>
 
 <span class="sd">    Warning: Attention</span>
 <span class="sd">             **ÉCRIRE LES DOCTESTS**</span>
+<span class="sd">    &gt;&gt;&gt; import numpy</span>
+<span class="sd">    &gt;&gt;&gt; def cmp (x,y): </span>
+<span class="sd">    ...    if x == y:</span>
+<span class="sd">    ...       return 0</span>
+<span class="sd">    ...    elif x &lt; y:</span>
+<span class="sd">    ...       return -1</span>
+<span class="sd">    ...    else:</span>
+<span class="sd">    ...       return 1</span>
+<span class="sd">    &gt;&gt;&gt; t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])</span>
+<span class="sd">    &gt;&gt;&gt; quicksort(t, cmp)</span>
+<span class="sd">    &gt;&gt;&gt; list(map(int,t))</span>
+<span class="sd">    [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">t</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+    <span class="n">quicksort_slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -2512,25 +2611,61 @@ elements.</p>
 <details class="warning" open>
   <summary>Attention</summary>
   <p><strong>ÉCRIRE LES DOCTESTS</strong></p>
-</details>
+</details>      <blockquote>
+<blockquote>
+<blockquote>
+<p>import numpy
+def cmp (x,y): 
+...    if x == y:
+...       return 0
+...    elif x &lt; y:
+...       return -1
+...    else:
+...       return 1
+t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
+s = {'left': 0, 'right': len(t) - 1, 'data': t}
+quicksort_slice(s, cmp)
+list(map(int,s['data']))
+[1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
           <details class="quote">
             <summary>Source code in <code>src/sorting.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
 <span class="normal">130</span>
-<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">quicksort_slice</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">):</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">quicksort_slice</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A sorting function implementing the quicksort algorithm.</span>
 
@@ -2544,8 +2679,25 @@ elements.</p>
 
 <span class="sd">    Warning: Attention</span>
 <span class="sd">             **ÉCRIRE LES DOCTESTS**</span>
+<span class="sd">    &gt;&gt;&gt; import numpy</span>
+<span class="sd">    &gt;&gt;&gt; def cmp (x,y): </span>
+<span class="sd">    ...    if x == y:</span>
+<span class="sd">    ...       return 0</span>
+<span class="sd">    ...    elif x &lt; y:</span>
+<span class="sd">    ...       return -1</span>
+<span class="sd">    ...    else:</span>
+<span class="sd">    ...       return 1</span>
+<span class="sd">    &gt;&gt;&gt; t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])</span>
+<span class="sd">    &gt;&gt;&gt; s = {&#39;left&#39;: 0, &#39;right&#39;: len(t) - 1, &#39;data&#39;: t}</span>
+<span class="sd">    &gt;&gt;&gt; quicksort_slice(s, cmp)</span>
+<span class="sd">    &gt;&gt;&gt; list(map(int,s[&#39;data&#39;]))</span>
+<span class="sd">    [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span><span class="n">naive_pivot</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+        <span class="n">quicksort_slice</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">cmp</span><span class="p">)</span>
+        <span class="n">quicksort_slice</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cmp</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
