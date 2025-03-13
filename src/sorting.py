@@ -94,14 +94,15 @@ def merge_sort (t,cmp):
         t2 = merge_sort((t[((n-1)//2+1):n]),cmp)
         return merge(t1,t2,cmp)
     
-def quicksort (t, cmp):
+def quicksort (t, cmp, pivot_func):
     """
     A sorting function implementing the quicksort algorithm on the whole array `t`.
     
     Args:
       t (Array): An array of Element
       cmp (function: A comparison function, returning 0 if a == b, -1 is a < b, 1 if a > b
-
+      pivot_func (function): A function that returns the pivot index inside a slice.
+      
     **Returns:** Nothing
 
     Note:
@@ -118,15 +119,15 @@ def quicksort (t, cmp):
     ...    else:
     ...       return 1
     >>> t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
-    >>> quicksort(t, cmp)
+    >>> quicksort(t, cmp, random_pivot)
     >>> list(map(int,t))
     [1, 2, 3, 4, 5, 6, 7, 8, 9]
     """
     s = {'data':t, 'left':0, 'right':len(t)-1}
-    quicksort_slice(s, cmp)
+    quicksort_slice(s, cmp, pivot_func)
 
 
-def quicksort_slice (s, cmp):
+def quicksort_slice (s, cmp, pivot_func):
     """
     A sorting function implementing the quicksort algorithm.
     
@@ -135,7 +136,7 @@ def quicksort_slice (s, cmp):
                 `data`, `left`, `right` representing resp. an array of objects and left
                  and right bounds of the slice.
       cmp (function): A comparison function, returning 0 if a == b, -1 is a < b, 1 if a > b
-    
+      pivot_func (function): A function that returns the pivot index inside a slice.
     **Returns:** Nothing
 
     Warning: Attention
@@ -150,15 +151,18 @@ def quicksort_slice (s, cmp):
     ...       return 1
     >>> t = numpy.array([5, 6, 1, 3, 4, 9, 8, 2, 7])
     >>> s = {'left': 0, 'right': len(t) - 1, 'data': t}
-    >>> quicksort_slice(s, cmp)
+    >>> quicksort_slice(s, cmp, random_pivot)
     >>> list(map(int,s['data']))
     [1, 2, 3, 4, 5, 6, 7, 8, 9]
     """
     
     if s['left'] < s['right']:
-        (s1, s2) = partition(s, cmp,naive_pivot(s))
-        quicksort_slice(s1, cmp)
-        quicksort_slice(s2, cmp)
+        pivot_pos = pivot_func(s)
+        (s1, s2) = partition(s, cmp, pivot_pos)
+        if s1['left'] < s1['right']:
+            quicksort_slice(s1, cmp, pivot_func)
+        if s2['left'] < s2['right']:
+            quicksort_slice(s2, cmp, pivot_func)
 
 def naive_pivot(s):
     '''
@@ -180,6 +184,36 @@ def naive_pivot(s):
       3
     '''
     return s['left']
+
+def random_pivot(s):
+    """
+    Returns a random index between `left` and `right` (inclusive).
+
+    Args:
+      s (dict): A dictionary representing a slice of an array, containing:
+                - "left": left bound,
+                - "right": right bound.
+
+    Returns:
+      int: A random integer between `s['left']` and `s['right']`.
+
+    Examples:
+      >>> import random
+      >>> random.seed(42)
+      >>> s = {'left': 2, 'right': 10}
+      >>> random_pivot(s) in range(s['left'], s['right'] + 1)
+      True
+
+      >>> s = {'left': 0, 'right': 5}
+      >>> pivot = random_pivot(s)
+      >>> s['left'] <= pivot <= s['right']
+      True
+      """
+      
+    left_index=s['left']
+    right_index=s['right']
+    return random.randint(left_index, right_index)  
+
 
 def partition (s, cmp, pivot_pos):
     """
@@ -218,9 +252,9 @@ def partition (s, cmp, pivot_pos):
       >>> p = {'left':0,'right':len(t)-1,'data':t}
       >>> p1,p2 = partition(p,cmp,0)
       >>> list(p1['data'][p1['left']:p1['right']+1])
-      [2, 1, 3, 4]
+      [4, 2, 1, 3]
       >>> list(p2['data'][p2['left']:p2['right']+1])
-      [8, 9, 7, 6]
+      [9, 8, 6, 7]
       >>> t = numpy.array([2, 1])
       >>> p = {'left': 0, 'right': len(t) - 1, 'data': t}
       >>> p1, p2 = partition(p, cmp, 0)  # Pivot = 2
@@ -236,27 +270,31 @@ def partition (s, cmp, pivot_pos):
              * Remplacer `None` par la valeur attendue
              * Rajouter des tests
     """
-    i = s['left'] + 1
-    j = s['right']
-    p = s['data'][pivot_pos]
-    place = s['left']
+    data = s['data']
+    left, right = s['left'], s['right']
+    pivot = data[pivot_pos]
+
+    data[left], data[pivot_pos] = data[pivot_pos], data[left]
+
+    i, j = left + 1, right
+
     while i <= j:
-        comp = cmp(s['data'][i], p)
-        if comp < 0:
-            s['data'][i], s['data'][place] = s['data'][place], s['data'][i]
-            place = i
+        while i <= j and cmp(data[i], pivot) < 0:
             i += 1
-        else:
-            s['data'][i], s['data'][j] = s['data'][j], s['data'][i]
+        while i <= j and cmp(data[j], pivot) > 0:
+            j -= 1
+        if i < j:
+            data[i], data[j] = data[j], data[i]
+            i += 1
             j -= 1
 
-    p1 = {"data": s['data'], "left": s['left'], "right": place - 1}
-    p2 = {"data": s['data'], "left": place + 1, "right": s['right']}
-    return (p1, p2)
+    data[left], data[j] = data[j], data[left]
+
+    return {"data": data, "left": left, "right": j - 1}, {"data": data, "left": j + 1, "right": right}
 
 
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    doctest.testmod(verbose=True) # "verbose=True" pour afficher la trace des tests qui passent
 
