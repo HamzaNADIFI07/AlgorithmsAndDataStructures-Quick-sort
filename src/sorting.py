@@ -11,6 +11,7 @@ Note: Author
 import copy
 import random
 import numpy as np
+import element
 
 def merge (t1,t2, cmp):
     """
@@ -292,7 +293,19 @@ def partition (s, cmp, pivot_pos):
 
     return {"data": data, "left": left, "right": j - 1}, {"data": data, "left": j + 1, "right": right}
 
+def optimal_pivot(s):
+    """
+    Returns the index of the median element in the slice.
 
+    Examples:
+      >>> s = {'data': [5, 1, 9, 3, 7], 'left': 0, 'right': 4}
+      >>> optimal_pivot(s)
+      2
+      >>> s = {'data': [10, 20, 30, 40, 50], 'left': 1, 'right': 3}
+      >>> optimal_pivot(s)
+      2
+    """
+    return s['left'] + (s['right'] - s['left']) // 2
 
 if __name__ == "__main__":
     import doctest

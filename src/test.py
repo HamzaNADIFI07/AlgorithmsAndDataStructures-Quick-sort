@@ -121,7 +121,34 @@ def increasing_100():
 
             file.write(f"{size} {avg_merge:.2f} {avg_quick_naive:.2f} {avg_quick_random:.2f}\n")
 
+def optimal_100():
+    """
+    Runs sorting benchmarks using the optimal pivot (median) for QuickSort
+    on randomly generated arrays of sizes 1 to 100.
+    Stores the average number of comparisons in `optimal_100.dat`.
+    """
+    with open("optimal_100.dat", "w") as file:
+        print("Running benchmarks with optimal pivot...")
 
+        for size in range(1, 101):
+            global cpt
+            quick_optimal_total = 0
+
+            for _ in range(100):
+                array = generate.random_array(size)
+
+                cpt = 0
+                sorting.quicksort(array, cmp, sorting.optimal_pivot)
+                quick_optimal_total += cpt
+
+            avg_quick_optimal = quick_optimal_total / 100
+
+            file.write(f"{size} {avg_quick_optimal:.2f}\n")
+
+            if size % 10 == 0:
+                print(f"Tests pour taille {size} complétés...")
+
+        print("✅ Benchmarks terminés avec optimal pivot ! Résultats enregistrés dans 'optimal_100.dat'.")
 
 if __name__ == "__main__":
     cpt = 0
@@ -148,4 +175,5 @@ if __name__ == "__main__":
     else:
         raise Exception("Array has not been correctly sorted by quicksort")
     #random_100()
-    increasing_100()
+    #increasing_100()
+    optimal_100()
